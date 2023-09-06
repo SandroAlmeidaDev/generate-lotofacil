@@ -18,21 +18,26 @@
 - [ExcelJS](https://github.com/exceljs/exceljs)
 
 
-## Instalando o Back End para essa aplicação
-1 - git clone  https://github.com/SandroAlmeidaDev/generate-lotofacil.git
+## Instalando a aplicação
 
-2 - cd generate-lotofacil
+```
+git clone  https://github.com/SandroAlmeidaDev/generate-lotofacil.git;
+cd generate-lotofacil;
+npm install;
 
-3 - npm install
-
+```
 ## Testando o projeto 
-1 - npm run dev
-No terminal irá pedir as seguintes informações:
-```
-Informe a combinação de números fixos separados por vírgula: 3,4,5,6,7,16,20,25
-Informe a quantidade de jogos que deseja gerar: 130
 
 ```
+npm run dev
+
+```
+## No terminal irá pedir as seguintes informações:
+
+1 - Informe a combinação de números fixos separados por vírgula: 3,4,5,6,7,16,20,25
+
+2 - Informe a quantidade de jogos que deseja gerar: 130
+
 
 # License 
 
