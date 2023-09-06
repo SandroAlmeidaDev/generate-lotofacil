@@ -108,7 +108,6 @@ rl.question('Informe a combinação de números fixos separados por vírgula: ',
       })
       .on('end', () => {
 
-        // Escreve o cabeçalho das colunas
         worksheet.addRow(['Jogo', 'Bola 1', 'Bola 2', 'Bola 3', 'Bola 4', 'Bola 5', 'Bola 6', 'Bola 7', 'Bola 8', 'Bola 9', 'Bola 10', 'Bola 11', 'Bola 12', 'Bola 13', 'Bola 14', 'Bola 15', 'Total Par', 'Total Ímpar', 'Primos', 'Contorno', 'Centro', 'SomaTotal']);
 
         for (let i = 0; i < numGames; i++) {
@@ -132,21 +131,11 @@ rl.question('Informe a combinação de números fixos separados por vírgula: ',
             const totalCentro = generatedCombination.filter(num => [7, 8, 9, 12, 13, 14, 17, 18, 19].includes(num)).length;
             const totalSoma = generatedCombination.reduce((acc, num) => acc + num, 0);
 
-            console.log(`Totais para Combinação ${i + 1}:`);
-            console.log(`Total de números pares: ${totalPar}`);
-            console.log(`Total de números ímpares: ${totalImpar}`);
-            console.log(`Total de números primos: ${totalPrimos}`);
-            console.log(`Total de números de contorno: ${totalContorno}`);
-            console.log(`Total de números de centro: ${totalCentro}`);
-            console.log(`Total da soma de todos os números: ${totalSoma}`);
-            console.log('-----------------------------------');
-
-            const row = [`Jogo ${i + 1}`, ...generatedCombination, totalPar, totalImpar, totalPrimos, totalContorno, totalCentro, totalSoma];
+            const row = [`${i + 1}`, ...generatedCombination, totalPar, totalImpar, totalPrimos, totalContorno, totalCentro, totalSoma];
             worksheet.addRow(row);
           }
         }
 
-        // outputStream.end();
         const outputFile = './generated_combinations.xlsx';
         workbook.xlsx.writeFile(outputFile)
           .then(() => {
