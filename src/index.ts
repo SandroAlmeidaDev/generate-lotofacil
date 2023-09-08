@@ -159,7 +159,7 @@ rl.question('Informe a combinação de números fixos separados por vírgula: ',
             }
           }
 
-          const folderName = 'generated_combinations';
+          const folderName = 'src/generated_combinations';
 
           if (!fs.existsSync(folderName)) {
             fs.mkdirSync(folderName);
