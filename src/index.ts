@@ -1,4 +1,5 @@
-import * as fs from 'fs';
+import * as fs from 'node:fs';
+import crypto from 'node:crypto'
 import csvParser from 'csv-parser';
 import readline from 'readline';
 import ExcelJS from 'exceljs';
@@ -90,64 +91,96 @@ rl.question('Informe a combinação de números fixos separados por vírgula: ',
   rl.question('Informe a quantidade de jogos que deseja gerar: ', (numGamesInput) => {
     const numGames = parseInt(numGamesInput, 10);
 
-    const filePath = './resultados_lotofacil.csv';
+    rl.question('Informe a quantidade de dezendas que de cada jogo: ', (numTensInput) => {
+      const numTens = parseInt(numTensInput, 10);
 
-    const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet('Combinations');
+      const filePath = './resultados_lotofacil.csv';
 
-    const existingCombinations: Combination[] = [];
+      const workbook = new ExcelJS.Workbook();
+      const worksheet = workbook.addWorksheet('Combinations');
 
-    fs.createReadStream(filePath)
-      .pipe(csvParser())
-      .on('data', (row: CsvRow) => {
-        const numbers = extractNumbers(row);
-        const combination: Combination = {
-          bolas: numbers,
-        };
-        existingCombinations.push(combination);
-      })
-      .on('end', () => {
+      const existingCombinations: Combination[] = [];
 
-        worksheet.addRow(['Jogo', 'Bola 1', 'Bola 2', 'Bola 3', 'Bola 4', 'Bola 5', 'Bola 6', 'Bola 7', 'Bola 8', 'Bola 9', 'Bola 10', 'Bola 11', 'Bola 12', 'Bola 13', 'Bola 14', 'Bola 15', 'Total Par', 'Total Ímpar', 'Primos', 'Contorno', 'Centro', 'SomaTotal']);
+      fs.createReadStream(filePath)
+        .pipe(csvParser())
+        .on('data', (row: CsvRow) => {
+          const numbers = extractNumbers(row);
+          const combination: Combination = {
+            bolas: numbers,
+          };
+          existingCombinations.push(combination);
+        })
+        .on('end', () => {
 
-        for (let i = 0; i < numGames; i++) {
-          const generatedCombination = generateRandomCombinations(fixedNumbers, 15, 1)[0];
-          const sortedGeneratedCombination = generatedCombination.slice().sort((a, b) => a - b);
+          switch (numTens) {
+            case 15: 
+              worksheet.addRow(['Jogo', 'Bola 1', 'Bola 2', 'Bola 3', 'Bola 4', 'Bola 5', 'Bola 6', 'Bola 7', 'Bola 8', 'Bola 9', 'Bola 10', 'Bola 11', 'Bola 12', 'Bola 13', 'Bola 14', 'Bola 15', 'Total Par', 'Total Ímpar', 'Primos', 'Contorno', 'Centro', 'SomaTotal']);
+            break;
+            case 16:
+              worksheet.addRow(['Jogo', 'Bola 1', 'Bola 2', 'Bola 3', 'Bola 4', 'Bola 5', 'Bola 6', 'Bola 7', 'Bola 8', 'Bola 9', 'Bola 10', 'Bola 11', 'Bola 12', 'Bola 13', 'Bola 14', 'Bola 15', 'Bola 16', 'Total Par', 'Total Ímpar', 'Primos', 'Contorno', 'Centro', 'SomaTotal']);
+            break;
+            case 17:
+              worksheet.addRow(['Jogo', 'Bola 1', 'Bola 2', 'Bola 3', 'Bola 4', 'Bola 5', 'Bola 6', 'Bola 7', 'Bola 8', 'Bola 9', 'Bola 10', 'Bola 11', 'Bola 12', 'Bola 13', 'Bola 14', 'Bola 15', 'Bola 16', 'Bola 17', 'Total Par', 'Total Ímpar', 'Primos', 'Contorno', 'Centro', 'SomaTotal']);
+            break;
+            case 18:
+              worksheet.addRow(['Jogo', 'Bola 1', 'Bola 2', 'Bola 3', 'Bola 4', 'Bola 5', 'Bola 6', 'Bola 7', 'Bola 8', 'Bola 9', 'Bola 10', 'Bola 11', 'Bola 12', 'Bola 13', 'Bola 14', 'Bola 15', 'Bola 16', 'Bola 17', 'Bola 18', 'Total Par', 'Total Ímpar', 'Primos', 'Contorno', 'Centro', 'SomaTotal']);
+            break;
+            case 19:
+              worksheet.addRow(['Jogo', 'Bola 1', 'Bola 2', 'Bola 3', 'Bola 4', 'Bola 5', 'Bola 6', 'Bola 7', 'Bola 8', 'Bola 9', 'Bola 10', 'Bola 11', 'Bola 12', 'Bola 13', 'Bola 14', 'Bola 15', 'Bola 16', 'Bola 17', 'Bola 18', 'Bola 19', 'Total Par', 'Total Ímpar', 'Primos', 'Contorno', 'Centro', 'SomaTotal']);
+            break;
+            case 20:
+              worksheet.addRow(['Jogo', 'Bola 1', 'Bola 2', 'Bola 3', 'Bola 4', 'Bola 5', 'Bola 6', 'Bola 7', 'Bola 8', 'Bola 9', 'Bola 10', 'Bola 11', 'Bola 12', 'Bola 13', 'Bola 14', 'Bola 15', 'Bola 16', 'Bola 17', 'Bola 18', 'Bola 19', 'Bola 20', 'Total Par', 'Total Ímpar', 'Primos', 'Contorno', 'Centro', 'SomaTotal']);
+            break;
+          }          
 
-          generatedCombination.sort((a, b) => a - b);
+          for (let i = 0; i < numGames; i++) {
+            const generatedCombination = generateRandomCombinations(fixedNumbers, numTens, 1)[0];
+            const sortedGeneratedCombination = generatedCombination.slice().sort((a, b) => a - b);
 
-          const exists = existingCombinations.some((existingCombination) => {
-            const sortedExistingCombination = existingCombination.bolas.slice().sort((a, b) => a - b);
-            return JSON.stringify(sortedGeneratedCombination) === JSON.stringify(sortedExistingCombination);
-          });
+            generatedCombination.sort((a, b) => a - b);
 
-          if (exists) {
-            console.log(`Combinação ${i + 1}: ${generatedCombination.join(', ')} (Já existe)\n`);
-          } else {
-            const totalPar = generatedCombination.filter(num => num % 2 === 0).length;
-            const totalImpar = generatedCombination.filter(num => num % 2 !== 0).length;
-            const totalPrimos = generatedCombination.filter(num => isPrime(num)).length;
-            const totalContorno = generatedCombination.filter(num => [1, 2, 3, 4, 5, 6, 10, 11, 15, 16, 20, 21, 25].includes(num)).length;
-            const totalCentro = generatedCombination.filter(num => [7, 8, 9, 12, 13, 14, 17, 18, 19].includes(num)).length;
-            const totalSoma = generatedCombination.reduce((acc, num) => acc + num, 0);
+            const exists = existingCombinations.some((existingCombination) => {
+              const sortedExistingCombination = existingCombination.bolas.slice().sort((a, b) => a - b);
+              return JSON.stringify(sortedGeneratedCombination) === JSON.stringify(sortedExistingCombination);
+            });
 
-            const row = [`${i + 1}`, ...generatedCombination, totalPar, totalImpar, totalPrimos, totalContorno, totalCentro, totalSoma];
-            worksheet.addRow(row);
+            if (exists) {
+              console.log(`Combinação ${i + 1}: ${generatedCombination.join(', ')} (Já existe)\n`);
+            } else {
+              const totalPar = generatedCombination.filter(num => num % 2 === 0).length;
+              const totalImpar = generatedCombination.filter(num => num % 2 !== 0).length;
+              const totalPrimos = generatedCombination.filter(num => isPrime(num)).length;
+              const totalContorno = generatedCombination.filter(num => [1, 2, 3, 4, 5, 6, 10, 11, 15, 16, 20, 21, 25].includes(num)).length;
+              const totalCentro = generatedCombination.filter(num => [7, 8, 9, 12, 13, 14, 17, 18, 19].includes(num)).length;
+              const totalSoma = generatedCombination.reduce((acc, num) => acc + num, 0);
+
+              const row = [`${i + 1}`, ...generatedCombination, totalPar, totalImpar, totalPrimos, totalContorno, totalCentro, totalSoma];
+              worksheet.addRow(row);
+            }
           }
-        }
 
-        const outputFile = './generated_combinations.xlsx';
-        workbook.xlsx.writeFile(outputFile)
-          .then(() => {
-            console.log(`Jogos gerados foram salvos em ${outputFile}`);
-            rl.close();
-          })
-          .catch((error) => {
-            console.error('Erro ao salvar o arquivo XLSX:', error);
-            rl.close();
-          });
-        rl.close();
-      });
+          const folderName = 'generated_combinations';
+
+          if (!fs.existsSync(folderName)) {
+            fs.mkdirSync(folderName);
+          }
+
+          const randomOutputFile = crypto.randomUUID()
+
+          const outputFile = `./${folderName}/${randomOutputFile}.xlsx`
+
+          workbook.xlsx.writeFile(outputFile)
+            .then(() => {
+              console.log(`Jogos gerados foram salvos em ${outputFile}`);
+              rl.close();
+            })
+            .catch((error) => {
+              console.error('Erro ao salvar o arquivo XLSX:', error);
+              rl.close();
+            });
+          rl.close();
+        });
+    });
   });
 });
 
