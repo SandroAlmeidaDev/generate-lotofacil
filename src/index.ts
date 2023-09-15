@@ -1,4 +1,4 @@
-import * as fs from 'node:fs';
+import fs from 'node:fs';
 import crypto from 'node:crypto'
 import csvParser from 'csv-parser';
 import readline from 'readline';
@@ -44,6 +44,81 @@ function getRandomContourNumber(): number {
 function getRandomCenterNumber(): number {
   const centerNumbers = [7, 8, 9, 12, 13, 14, 17, 18, 19];
   return centerNumbers[Math.floor(Math.random() * centerNumbers.length)];
+}
+
+function getRandomLine1Number(): number {
+  const line1Numbers = [1,2,3,4,5];
+  return line1Numbers[Math.floor(Math.random() * line1Numbers.length)];
+}
+
+function getRandomLine2Number(): number {
+  const line2Numbers = [6,7,8,9,10];
+  return line2Numbers[Math.floor(Math.random() * line2Numbers.length)];
+}
+
+function getRandomLine3Number(): number {
+  const line3Numbers = [11,12,13,14,15];
+  return line3Numbers[Math.floor(Math.random() * line3Numbers.length)];
+}
+
+function getRandomLine4Number(): number {
+  const line4Numbers = [16,17,18,19,20];
+  return line4Numbers[Math.floor(Math.random() * line4Numbers.length)];
+}
+
+function getRandomLine5Number(): number {
+  const line5Numbers = [21,22,23,24,25];
+  return line5Numbers[Math.floor(Math.random() * line5Numbers.length)];
+}
+
+function getRandomCol1Number(): number {
+  const col1Numbers = [1,6,11,16,21];
+  return col1Numbers[Math.floor(Math.random() * col1Numbers.length)];
+}
+
+function getRandomCol2Number(): number {
+  const col2Numbers = [2,7,12,17,22];
+  return col2Numbers[Math.floor(Math.random() * col2Numbers.length)];
+}
+
+function getRandomCol3Number(): number {
+  const col3Numbers = [3,8,13,18,23];
+  return col3Numbers[Math.floor(Math.random() * col3Numbers.length)];
+}
+
+function getRandomCol4Number(): number {
+  const col4Numbers = [4,9,14,19,24];
+  return col4Numbers[Math.floor(Math.random() * col4Numbers.length)];
+}
+
+function getRandomCol5Number(): number {
+  const col5Numbers = [5,10,15,20,25];
+  return col5Numbers[Math.floor(Math.random() * col5Numbers.length)];
+}
+
+function getRandomVertical1Number(): number {
+  const vertical1Numbers = [1,7,13,19,25];
+  return vertical1Numbers[Math.floor(Math.random() * vertical1Numbers.length)];
+}
+
+function getRandomVertical2Number(): number {
+  const vertical2Numbers = [5,9,13,17,21];
+  return vertical2Numbers[Math.floor(Math.random() * vertical2Numbers.length)];
+}
+
+function getRandomVerticalNoNumber(): number {
+  const verticalNoNumbers = [2,3,4,6,8,10,11,12,14,15,16,18,20,22,23,24];
+  return verticalNoNumbers[Math.floor(Math.random() * verticalNoNumbers.length)];
+}
+
+function getRandomCrossNumber(): number {
+  const crossNumbers = [3,8,11,12,13,14,15];
+  return crossNumbers[Math.floor(Math.random() * crossNumbers.length)];
+}
+
+function getRandomCrossNoNumber(): number {
+  const crossNoNumbers = [1,2,4,5,6,7,9,10,16,17,19,20,21,22,24,25];
+  return crossNoNumbers[Math.floor(Math.random() * crossNoNumbers.length)];
 }
 
 function generateRandomCombinations(fixedNumbers: number[], length: number, numGames: number): number[][] {
@@ -94,7 +169,7 @@ rl.question('Informe a combinação de números fixos separados por vírgula: ',
     rl.question('Informe a quantidade de dezendas que de cada jogo: ', (numTensInput) => {
       const numTens = parseInt(numTensInput, 10);
 
-      const filePath = './resultados_lotofacil.csv';
+      const filePath = './lotofacil_results.csv';
 
       const workbook = new ExcelJS.Workbook();
       const worksheet = workbook.addWorksheet('Combinations');
