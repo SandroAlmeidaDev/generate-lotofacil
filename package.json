@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/index.ts",
-    "analise": "ts-node-dev --transpile-only --ignore-watch node_modules src/analise.ts"
+    "analise": "ts-node-dev --transpile-only --ignore-watch node_modules src/analise.ts",
+    "estat": "ts-node-dev --transpile-only --ignore-watch node_modules src/estatisticas.ts",
+    "repet": "ts-node-dev --transpile-only --ignore-watch node_modules src/repetidos.ts"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +21,7 @@
   "dependencies": {
     "csv-parser": "^3.0.0",
     "exceljs": "^4.3.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "mathjs": "^11.11.0"
   }
 }
